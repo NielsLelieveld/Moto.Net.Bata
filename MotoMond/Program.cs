@@ -43,8 +43,8 @@ namespace MotoMond
                 {
                     db.CreateTables();
 
-                    string masterIP = "192.168.0.100";
-                    int masterPort = 50000;
+                    string masterIP = ConfigurationManager.AppSettings.Get("masterAddress");
+                    int masterPort = Int32.Parse(ConfigurationManager.AppSettings.Get("masterPort"));
                     if (args.Length > 1)
                     {
                         string[] parts = args[1].Split(':');
@@ -300,7 +300,7 @@ namespace MotoMond
                 try
                 {
                     ac.SaveToMP3(filename);
-                } 
+                }
                 catch(Exception)
                 {
                     Console.WriteLine("Unable to decode audio!");

@@ -59,7 +59,15 @@ namespace Moto.Net
 
         public MasterRadio ConnectToMaster(string address, int port)
         {
-            IPAddress addr = IPAddress.Parse(address);
+            IPAddress addr;
+            try
+            {
+                addr = IPAddress.Parse(address);
+            }catch (System.FormatException)
+            {
+                //It's not an IP, lets try to resolve as domain.
+                addr = Dns.GetHostAddresses(address)[0];
+            }
             IPEndPoint ipend = new IPEndPoint(addr, port);
             this.master = new MasterRadio(this, ipend);
             //Wait for the master to respond
