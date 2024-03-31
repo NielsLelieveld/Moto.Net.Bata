@@ -36,19 +36,9 @@ namespace MotoMond
                 }
                 Dictionary<RadioID, IPAddress> controlStations = new Dictionary<RadioID, IPAddress>();
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                ConfigurationSectionGroup group = config.GetSectionGroup("Databases");
-                if (group.Sections.Count == 1)
-                {
-                    db = (IDatabase)group.Sections[0];
-                }
-                else
-                {
-                    db = new DatabaseMultiPlexer();
-                    foreach (IDatabase child in group.Sections)
-                    {
-                        ((DatabaseMultiPlexer)db).AddChild(child);
-                    }
-                }
+
+                db = new MySQLDB(ConfigurationManager.AppSettings.Get("dbConnectionString"));
+                db.Connect();
                 using (db)
                 {
                     db.CreateTables();

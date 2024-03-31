@@ -10,12 +10,18 @@ namespace MotoMond.Database
 {
     public class MySQLDB : Database
     {
+        public MySQLDB(string connectionString) { 
+           this.connectionString = connectionString;
+        }
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected MySqlConnection conn;
+        private string connectionString;
 
         public override void Connect()
         {
-            this.conn = new MySqlConnection(this.ConnectionStringElement.InnerText);
+            //this.conn = new MySqlConnection(this.ConnectionStringElement.InnerText);
+            this.conn = new MySqlConnection(this.connectionString);
             this.conn.Open();
         }
 
