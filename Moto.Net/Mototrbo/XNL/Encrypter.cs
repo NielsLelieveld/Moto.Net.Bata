@@ -28,7 +28,7 @@ namespace Moto.Net.Mototrbo.XNL
                 log.Info("Falling back to trbonet crypter...");
                 try
                 {
-                    Assembly trbonet = Assembly.LoadFrom("TRBOnet.Server.exe");
+                    Assembly trbonet = Assembly.LoadFrom(ConfigurationManager.AppSettings.Get("trboNetServerBinaryPath"));
                     Type crypter = trbonet.GetType("NS.Enginee.Mototrbo.Utils.XNLRepeaterCrypter");
                     MethodInfo mi = crypter.GetMethod("Encrypt", BindingFlags.Public | BindingFlags.Static);
                     //The method alters the data in place...
@@ -73,7 +73,7 @@ namespace Moto.Net.Mototrbo.XNL
                 log.Info("Falling back to trbonet crypter...");
                 try
                 {
-                    Assembly trbonet = Assembly.LoadFrom("TRBOnet.Server.exe");
+                    Assembly trbonet = Assembly.LoadFrom(ConfigurationManager.AppSettings.Get("trboNetServerBinaryPath"));
                     Type crypter = trbonet.GetType("NS.Enginee.Mototrbo.Utils.XNLMasterCrypter");
                     MethodInfo mi = crypter.GetMethod("Encrypt", BindingFlags.Public | BindingFlags.Static);
                     //The method alters the data in place...

@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 
 #MotoMond/App.config
+TrboNet.Server/
