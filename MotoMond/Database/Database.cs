@@ -43,7 +43,9 @@ namespace MotoMond.Database
 
         protected bool ShouldHaveTable(string tableName)
         {
-            return this.tables.Contains(tableName);
+            //TODO EH: Workaround to get MotoMond to create database tables on empty DB.
+            return true;
+            //return this.tables.Contains(tableName);
         }
 
         public abstract void Connect();
