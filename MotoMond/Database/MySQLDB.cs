@@ -31,7 +31,7 @@ namespace MotoMond.Database
             if (this.ShouldHaveTable("connectedRadios"))
             {
                 command = conn.CreateCommand();
-                command.CommandText = "CREATE TABLE IF NOT EXISTS connectedRadios(id INT NOT NULL, name VARCHAR(100), serialnumber VARCHAR(12), modelnumber VARCHAR(14), firmwareversion VARCHAR(12), lastseen DATETIME, PRIMARY KEY (id));";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS connectedRadios(id INT NOT NULL, name VARCHAR(255), serialnumber VARCHAR(255), modelnumber VARCHAR(255), firmwareversion VARCHAR(255), lastseen DATETIME, PRIMARY KEY (id));";
                 command.ExecuteNonQuery();
             }
             if (this.ShouldHaveTable("rssi"))
@@ -49,7 +49,7 @@ namespace MotoMond.Database
             if (this.ShouldHaveTable("radio"))
             {
                 command = conn.CreateCommand();
-                command.CommandText = "CREATE TABLE IF NOT EXISTS radio(id INT UNSIGNED NOT NULL, name VARCHAR(100), lastseen DATETIME, lastrssi FLOAT, samples INT, totalrssi DOUBLE, minrssi FLOAT, minrssitime DATETIME, maxrssi FLOAT, maxrssitime DATETIME, PRIMARY KEY(`id`));";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS radio(id INT UNSIGNED NOT NULL, name VARCHAR(255), lastseen DATETIME, lastrssi FLOAT, samples INT, totalrssi DOUBLE, minrssi FLOAT, minrssitime DATETIME, maxrssi FLOAT, maxrssitime DATETIME, PRIMARY KEY(`id`));";
                 command.ExecuteNonQuery();
             }
             if (this.ShouldHaveTable("location"))
