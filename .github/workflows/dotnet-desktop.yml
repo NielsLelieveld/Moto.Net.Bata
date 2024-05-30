@@ -30,3 +30,15 @@ jobs:
       run: copy .\MotoMond\App.config.noxnl .\MotoMond\App.config
     - name: Build
       run: msbuild $env:Solution_Name /p:platform="Any CPU" /p:configuration="${{ matrix.configuration }}"
+    - name: Create Zip
+      uses: papeloto/action-zip@v1
+      with:
+        files: .\MotoMond\bin\${{ matrix.configuration }}
+        dest: MotoMond_${{ matrix.configuration }}.zip
+    - name: Upload dotnet test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: MotoMond_${{ matrix.configuration }}.zip
+        path: MotoMond_${{ matrix.configuration }}.zip
+          # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
